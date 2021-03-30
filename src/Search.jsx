@@ -44,7 +44,7 @@ function Search(props){
         </div>
         <div>
           <ul>
-              {people && people.map(p => (<li><Link to={"/users/" + p.id}>{p.login} - {p.id} <Image height={"25px"} urlImage={p.avatar_url}/></Link></li>))}
+              {people && people.map(p => (<li key={p.id}><Link to={"/users/" + p.id}>{p.login} - {p.id} <Image height={"25px"} urlImage={p.avatar_url}/></Link></li>))}
           </ul>
         </div>
       </div>

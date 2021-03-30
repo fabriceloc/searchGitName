@@ -2,6 +2,7 @@ import "./styles.css";
 import React from "react";
 import Users from "./Users";
 import User from "./User";
+import Repo from "./Repo";
 
 import {
     BrowserRouter as Router,
@@ -28,13 +29,12 @@ export default function App() {
                         </ul>
                     </nav>
 
-                    {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/users">
                             <Users />
                         </Route>
                         <Route exact path="/users/:id" component={User} />
+                        <Route exact path="/repo/:id" component={Repo} />
                     </Switch>
                 </div>
             </Router>

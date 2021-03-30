@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Title from "./Title";
 import Image from "./Image";
+import {Link} from "react-router-dom";
 
 function User(props){
 
@@ -35,7 +36,7 @@ function User(props){
       <div>
           <Title field={person.login} backgroudColor="orange"/>
           <Image urlImage={person.avatar_url} height={"150px"}/>
-          <ul>{repos.map(r => <li>{r.name}</li>)}</ul>
+          <ul>{repos.map(r => <li key={r.id}><Link to={{ pathname: "/repo/" + r.id, repo : r}}>{r.name} - {r.id}</Link></li>)}</ul>
       </div>
     );
 }
