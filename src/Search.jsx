@@ -1,40 +1,54 @@
-import React, { Component } from "react";
+import React from "react";
+import Input from "./Input";
+import Image from "./Image";
+import { Link } from "react-router-dom";
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { word: "" };
-  }
-  render() {
-    const handleChange = (event) => {
-      this.setState({
-        word: event.target.value
-      });
+function Search(props){
+    const baseUrl = "https://api.github.com/search/users?q="
+    const [url, setUrl] = React.useState(baseUrl)
+    const [people, setPeople] = React.useState([])
+    React.useEffect(() => {
+      async function fetchPeople() {
+        const resp = await fetch(url, {
+            method: 'get',
+            headers: new Headers({
+                'Authorization': 'Authorization: ' + props.token,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            })
+        })
+        const json = await resp.json()
+        setPeople(json.items)
+      }
+      fetchPeople().then(r => null)
+    }, [url]);
+
+    const handleChange = (element) => {
+        element && setUrl(baseUrl+element);
     };
-    const { list, placeholder } = this.props;
+    function handleClick(id) {
+        history.push("/user" + id);
+    }
+    const { placeholder } = props;
     return (
       <div>
         <div>
           <form className="form-horizontal">
-            <input
+            <Input
               type="text"
               className="form-control"
               name="title"
               placeholder={placeholder}
-              onChange={handleChange}
+              setField={(field) => handleChange(field)}
             />
           </form>
         </div>
         <div>
           <ul>
-            {list.filter((country) =>
-              country.toLowerCase().includes(this.state.word.toLowerCase())
-            )}
+              {people && people.map(p => (<li><Link to={"/users/" + p.id}>{p.login} - {p.id} <Image height={"25px"} urlImage={p.avatar_url}/></Link></li>))}
           </ul>
         </div>
       </div>
     );
-  }
 }
 
 export default Search;

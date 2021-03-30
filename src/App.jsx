@@ -1,24 +1,43 @@
 import "./styles.css";
-import Button from "./Button";
+import React from "react";
+import Users from "./Users";
+import User from "./User";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 import Title from "./Title";
-import Search from "./Search";
 
 export default function App() {
-  const values = [
-    "Afghanistan",
-    "Åland Islands",
-    "Albania",
-    "Algeria",
-    "American Samoa",
-    "AndorrA",
-    "Angola"
-  ];
 
-  return (
-    <div className="App">
-      <Title field="Titre" color="green" /*height="400px"*/ />
-      <Search placeholder="Recherche ... . . " list={values} />
-      <Button title="filtrer" backgroudColor="pink" /*height="400px"*/ />
-    </div>
-  );
+    return (
+        <div>
+            <Router>
+                <div>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/users">Users</Link>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+                    <Switch>
+                        <Route exact path="/users">
+                            <Users />
+                        </Route>
+                        <Route exact path="/users/:id" component={User} />
+                    </Switch>
+                </div>
+            </Router>
+        </div>
+    );
 }
