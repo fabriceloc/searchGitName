@@ -25,9 +25,6 @@ function Search(props){
     const handleChange = (element) => {
         element && setUrl(baseUrl+element);
     };
-    function handleClick(id) {
-        history.push("/user" + id);
-    }
     const { placeholder } = props;
     return (
       <div>

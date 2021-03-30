@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 
-class Button extends Component {
-  render() {
-    const { title, backgroudColor, height = "25px" } = this.props;
+function Button(props) {
+    const { title, backgroudColor, height = "25px" } = props;
     return (
       <div>
         <button style={{ backgroundColor: backgroudColor, height: height }}>
@@ -10,6 +9,5 @@ class Button extends Component {
         </button>
       </div>
     );
-  }
 }
 export default Button;

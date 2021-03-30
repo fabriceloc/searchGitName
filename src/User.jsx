@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Title from "./Title";
 import Image from "./Image";
 import {Link} from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 function User(props){
 
@@ -11,10 +12,11 @@ function User(props){
     const [url, setUrl] = React.useState(baseUrl + props.match.params.id)
     React.useEffect(() => {
         async function myFetch() {
+            let token = (new Cookies()).get('myToken')
             const resp = await fetch(url, {
                 method: 'get',
                 headers: new Headers({
-                    'Authorization': 'Authorization: ' + "057f4d109814ce2e3da9777947bce913e2377f3a",
+                    'Authorization': 'Authorization: ' + token,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 })
             })
@@ -23,7 +25,7 @@ function User(props){
             const resp2 = await fetch(url + "/repos", {
                 method: 'get',
                 headers: new Headers({
-                    'Authorization': 'Authorization: ' + "057f4d109814ce2e3da9777947bce913e2377f3a",
+                    'Authorization': 'Authorization: ' + token,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 })
             })

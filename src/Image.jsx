@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React  from "react";
 
 function Image(props){
     const {urlImage, height, width} = props;
     return (
       <div>
-          <form className="form-horizontal">
+          <div className="form-horizontal">
               <img
                   src={urlImage}
                   width={width}
                   height={height}
               />
-          </form>
+          </div>
       </div>
     );
 }
